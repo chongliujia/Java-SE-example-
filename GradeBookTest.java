@@ -6,13 +6,11 @@
 public class GradeBookTest {
 
     public static void main(String[] args){
-        GradeBook gradeBook1 = new GradeBook("CS101 Introduction to Java Programming");
-        GradeBook gradeBook2 = new GradeBook("CS102 Data Structures in Java");
+        GradeBook_count myGradeBook = new GradeBook_count("CS101 Introduction to Java Programming.");
+        myGradeBook.displayMessage();
+        myGradeBook.inputGrades();
 
-        System.out.printf("gradeBook1 course name is: %s\n",
-                gradeBook1);
-        System.out.printf("gradeBook2 course name is: %s\n",
-                gradeBook2);
+        myGradeBook.displayGradeReport();
 
     }
 }
