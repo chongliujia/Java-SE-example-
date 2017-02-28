@@ -6,9 +6,11 @@ import java.util.Scanner;
 public class GradeBook {
 
     private String courseName;
+    private int[] grades;
 
-    public GradeBook(String name){
+    public GradeBook(String name, int[][] gradesArray){
         courseName = name;
+        grades = gradesArray;
     }
 
     public void setCourseName(String name){
@@ -20,47 +22,46 @@ public class GradeBook {
     }
 
     public void displayMessage(){
-
-        System.out.printf("Welcome to the grade book for\n%s!\n\n",
+        System.out.printf("welcome to the grade book for\n%s!\n",
                 getCourseName());
+
+        getCourseName();
     }
 
-    public void determineClassAverage(){
-        Scanner input = new Scanner(System.in);
+    public void processGrade(){
+        outputGrades();
 
-        int total, gradeCounter;
-        int grade;
-        double average;
+        System.out.printf("\n%s %d\n%s %d\n\n",
+               "Lowest grade in the grade book is", getMinimum(),
+                "Highest grade in the grade book is", getMaximum());
 
-        total = 0;
-        gradeCounter = 0;
+        outputGrades();
 
-        System.out.print("Enter grade or -1 to quit.");
-        grade = input.nextInt();
+    }
 
-        while(grade != -1){
-            total = total + grade;
-            gradeCounter = gradeCounter + 1;
 
-            System.out.print("Enter grade or -1 to quit: ");
+    public int getMinimum(){
+        int lowGrade = grades[0][0];
 
+        for(int[] studentGrades : grades){
+            for(int grade : studentGrades){
+                if(grade < lowGrade){
+                    lowGrade = grade;
+                }
+            }
         }
 
-        if(gradeCounter != 0){
-            average = (double)total;
+        return lowGrade;
+    }
 
-            System.out.printf("\nTotal of the %d grades entered is %d\n",
-                    gradeCounter, total);
-            System.out.printf("Class average is %.2f\n",
-                    average);
+    public int getMaximum(){
+        int highGrade = grades[0][0];
 
+        for(int[] studentGrades : grades){
+            for(int grade : grades){
+                
+            }
         }
-        else{
-            System.out.println("No grades were entered");
-        }
-
-
-
     }
 
 }
