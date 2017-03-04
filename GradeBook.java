@@ -1,12 +1,9 @@
 /**
- * Created by apple on 2017/2/26.
+ * Created by apple on 2017/3/4.
  */
-import java.util.Scanner;
-
 public class GradeBook {
-
     private String courseName;
-    private int[] grades;
+    private int[][] grades;
 
     public GradeBook(String name, int[][] gradesArray){
         courseName = name;
@@ -22,23 +19,20 @@ public class GradeBook {
     }
 
     public void displayMessage(){
-        System.out.printf("welcome to the grade book for\n%s!\n",
+        System.out.printf("Welcome to the grades book for\n%s\n\n",
                 getCourseName());
 
-        getCourseName();
     }
 
-    public void processGrade(){
+    public void processGrades(){
         outputGrades();
 
         System.out.printf("\n%s %d\n%s %d\n\n",
-               "Lowest grade in the grade book is", getMinimum(),
+                "Lowest grade in the grade book is", getMinimum(),
                 "Highest grade in the grade book is", getMaximum());
 
-        outputGrades();
-
+        outputBarChart();
     }
-
 
     public int getMinimum(){
         int lowGrade = grades[0][0];
@@ -58,10 +52,65 @@ public class GradeBook {
         int highGrade = grades[0][0];
 
         for(int[] studentGrades : grades){
-            for(int grade : grades){
-                
+            for(int grade : studentGrades){
+                if(grade > highGrade){
+                    highGrade = grade;
+                }
             }
+        }
+
+        return highGrade;
+    }
+
+    public double getAverage(int[] setOfGrades){
+        int total = 0;
+
+        for(int grade : setOfGrades){
+            total = total + grade;
+        }
+
+        return (double)total / setOfGrades.length;
+    }
+
+    public void outputGrades(){
+        System.out.println("The grades are:\n");
+        System.out.print("          ");
+
+        for(int student = 0; student < grades.length; student++){
+            System.out.printf("Student %2d", student + 1);
+
+            for(int test : grades[student]){
+                System.out.printf("%8d", test);
+            }
+
+            double average = getAverage(grades[student]);
+            System.out.printf("%9.2f\n", average);
         }
     }
 
+    public void outputBarChart(){
+        System.out.println("Ovetall grade distribution:");
+
+        int[] frequency = new int[11];
+
+        for(int[] studentGrades : grades){
+            for(int grade : studentGrades){
+                ++frequency[grade / 10];
+            }
+        }
+
+        for(int count = 0;  count < frequency[count]; count++){
+            if(count == 10){
+                System.out.printf("%5d: ", 100);
+            }
+            else{
+                System.out.printf("%02d-%02d: ",
+                        count * 10, count * 10 + 9);
+            }
+
+            for(int stars = 0; stars < frequency[count]; stars++){
+                System.out.print("*");
+            }
+        }
+    }
 }
