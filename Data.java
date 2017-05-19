@@ -10,7 +10,7 @@ public class Data {
             0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
     };
 
-    public Date(int theMonth, int theDay, int theYear) {
+    public Data(int theMonth, int theDay, int theYear) {
         month = checkMonth(theMonth);
         year = theYear;
         day = checkDay(theDay);
